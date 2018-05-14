@@ -2,7 +2,7 @@
 Write a server that provides a REST API. A lot is left for your interpretation and decision-making. In the end, one should be able to interact with the API on a server somewhere using postman or CURL with a simple key. One should also be able to build the code from the repo and run it locally.
 
 # Write the code
-Fork this repo. Use any programming language.
+Fork this repo. Use any programming language, framework, database, etc.
 
 ## Required Models
 
