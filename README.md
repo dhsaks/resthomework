@@ -36,3 +36,6 @@ Someone should be to pull down your branch and, fairly easily, run the code loca
 
 # Deploy it and create a PR
 Deploy it somewhere Heroku, AWS, Google Cloud, etc.  Create a PR back to this repo from your fork and include the URL to the deployed app.
+
+# Dockerize the application
+Create a Dockerfile so anyone with the repo can build a docker image
