@@ -26,10 +26,10 @@ Write a basic CRUD API for this  with the following required Fields
 - count (amount of product in the order)
 - address
 
-In general, maintain coherence between order counts and inventory counts. For instance, when an order is created, the application should subtract from inventory. When an order is deleted, the application should add back the order's items to the inventory.
+**IMPORTANT FUNCTIONAL REQUIREMENT:** maintain coherence between order counts and inventory counts. For instance, when an order is created, the application should subtract from inventory. When an order is deleted, the application should add back the order's items to the inventory.
 
 # Secure the API
-Use SSL (letsencrypt certs are good). Endpoints should be secured using some kind of token. One option for tokens is to use github or google OAuth and whitelist specific user ids that can be given to you.
+Use SSL. Endpoints should be secured using some kind of token. One option for tokens is to use github or google OAuth and whitelist specific user ids that can be given to you.
 
 # Run locally
 Someone should be to pull down your branch and, fairly easily, run the code locally.
@@ -37,5 +37,5 @@ Someone should be to pull down your branch and, fairly easily, run the code loca
 # Deploy it and create a PR
 Deploy it somewhere Heroku, AWS, Google Cloud, etc.  Create a PR back to this repo from your fork and include the URL to the deployed app.
 
-# Dockerize the application
-Create a Dockerfile so anyone with the repo can build a docker image
+# BONUS: Dockerize the application
+For bonus points, create a Dockerfile so anyone with the repo can build a docker image
