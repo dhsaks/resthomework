@@ -29,7 +29,7 @@ Write a basic CRUD API for this  with the following required Fields
 **IMPORTANT FUNCTIONAL REQUIREMENT:** maintain coherence between order counts and inventory counts. For instance, when an order is created, the application should subtract from inventory. When an order is deleted, the application should add back the order's items to the inventory.
 
 # Secure the API
-Use SSL. Endpoints should be secured using some kind of token. One option for tokens is to use github or google OAuth and whitelist specific user ids that can be given to you.
+Use SSL. Endpoints should be secured using some kind of token. For simplicity, you can just create an endpoint that will give a user a token if they use a secret password.
 
 # Run locally
 Someone should be to pull down your branch and, fairly easily, run the code locally.
