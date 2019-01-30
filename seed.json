@@ -1,0 +1,32 @@
+[
+  {
+    "product_name": "Faucon Chevron A-Line Coat",
+    "designer": "Moncler",
+    "type": "Women's apparel",
+    "price": 1275.0,
+    "inventory": {
+      "product_id": 400098909071,
+      "count": 30
+    }
+  },
+  {
+    "product_name": "The Legging Sateen Ankle Jeans",
+    "designer": "AG Jeans",
+    "type": "Women's apparel",
+    "price": 178.0,
+    "inventory": {
+      "product_id": 400087531515,
+      "count": 40
+    }
+  },
+  {
+    "product_name": "Patent Leather High-Waist Mini Skirt",
+    "designer": "Helmut Lang",
+    "type": "Women's apparel",
+    "price": 745.0,
+    "inventory": {
+      "product_id": 400099683476,
+      "count": 20
+    }
+  }
+]
