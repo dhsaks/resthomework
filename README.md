@@ -18,9 +18,9 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 
 `/products/:product_name` get by product name
 
-`orders` get all orders
+`/orders` get all orders
 
-`/:order_id` get order by order id
+`/orders/:order_id` get order by order id
 
 `/inventory` get all inventory
 
@@ -30,13 +30,22 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 
 `/products` - post new product with fields product_name, designer, type, price
 
-`orders` post new order with fields product_id, count, street, city, state, zip (each order placed will update inventory accordingly)
+`/orders` post new order with fields product_id, count, street, city, state, zip (each order placed will update inventory accordingly)
+
+`/inventory` post new inventory item
 
 ## put routes
 
 `products/:product_name` update product with fields product_name, designer, type, price
 
+`orders/:order_id` update order quantities and update inventory accordingly
+
+`inventory/:product_id` update inventory item with fields product_id and count
+
 ## delete routes
 
 `products/:product_name` delete by product name
+
 `orders/:order_id` delete by order id (for each cancelled order, said items will go back into inventory)
+
+`/inventory/:product_id` delete by product id
