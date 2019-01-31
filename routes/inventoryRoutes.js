@@ -58,4 +58,17 @@ inventoryRouter.put('/:product_id', (req, res) => {
     });
 });
 
+inventoryRouter.delete('/:product_id', (req, res) => {
+  console.log(req.params.product_id);
+  let query = { product_id: req.params.product_id };
+  delete ('saks', 'inventory', query)
+    .then(data => {
+      //   console.log(data);
+      res.redirect('/inventory');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 module.exports = inventoryRouter;

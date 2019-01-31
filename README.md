@@ -22,6 +22,10 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 
 `/:order_id` get order by order id
 
+`/inventory` get all inventory
+
+`inventory/:prouct_id` get inventory item by product id
+
 ## post routes
 
 `/products` - post new product with fields product_name, designer, type, price
@@ -35,3 +39,4 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 ## delete routes
 
 `products/:product_name` delete by product name
+`orders/:order_id` delete by order id (for each cancelled order, said items will go back into inventory)

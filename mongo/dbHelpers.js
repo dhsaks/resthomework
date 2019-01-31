@@ -104,6 +104,27 @@ const deleteOne = (dbName, collectionName, item) => {
   });
 };
 
+// find one document and delete itdelete one document in the collection
+const findOneAndDelete = (dbName, collectionName, item) => {
+  return new Promise((resolve, reject) => {
+    connect(
+      dbName,
+      url
+    )
+      .then(db => {
+        // find one and Delete ex
+        db.collection(collectionName)
+          .findOneAndDelete(item)
+          .then(result => {
+            resolve(result);
+          });
+      })
+      .catch(err => {
+        resolve(err);
+      });
+  });
+};
+
 // upate one document in the collection
 const updateOne = (dbName, collectionName, query, update) => {
   return new Promise((resolve, reject) => {
@@ -133,4 +154,5 @@ module.exports = {
   insertOne: insertOne,
   deleteOne: deleteOne,
   updateOne: updateOne,
+  findOneAndDelete: findOneAndDelete,
 };
