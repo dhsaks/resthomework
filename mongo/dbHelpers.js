@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
@@ -27,14 +27,17 @@ const connect = (dbName, url) => {
 // get colletion and return all items
 const getCollection = (dbName, collectionName) => {
   return new Promise((resolve, reject) => {
-    coonnect(dbName, url)
+    connect(
+      dbName,
+      url
+    )
       .then(db => {
-        resolve(
-          db
-            .collection(collectionName)
-            .find()
-            .toArray()
-        );
+        db.collection(collectionName)
+          .find()
+          .toArray()
+          .then(result => {
+            resolve(result);
+          });
       })
       .catch(err => {
         reject(err);
@@ -45,17 +48,18 @@ const getCollection = (dbName, collectionName) => {
 // insert one document into the collection
 const insertOne = (dbName, collectionName, item) => {
   return new Promise((resolve, reject) => {
-    coonnect(dbName, url).then(db => {
-      //   resolve(
+    connect(
+      dbName,
+      url
+    ).then(db => {
       db.collection(collectionName)
         .insertOne(item)
         .then(result => {
           resolve(result);
         })
-        .cathc(err => {
-          res.send(err);
+        .catch(err => {
+          reject(err);
         });
-      //   );
     });
   });
 };
@@ -63,17 +67,29 @@ const insertOne = (dbName, collectionName, item) => {
 // find one document in the collection
 const findOne = (dbName, collectionName, item) => {
   return new Promise((resolve, reject) => {
-    coonnect(dbName, url).then(db => {
+    connect(
+      dbName,
+      url
+    ).then(db => {
       // find one ex. { product_name: productName }
-      resolve(db.collection(collectionName).findOne(item));
+      db.collection(collectionName)
+        .findOne(item)
+        .then(result => {
+          resolve(result);
+        });
     });
+  }).catch(err => {
+    reject(err);
   });
 };
 
 // delete one document in the collection
 const deleteOne = (dbName, collectionName, item) => {
   return new Promise((resolve, reject) => {
-    coonnect(dbName, url)
+    connect(
+      dbName,
+      url
+    )
       .then(db => {
         // find one ex. { product_name: productName }
         db.collection(collectionName)
@@ -91,7 +107,10 @@ const deleteOne = (dbName, collectionName, item) => {
 // upate one document in the collection
 const updateOne = (dbName, collectionName, query, update) => {
   return new Promise((resolve, reject) => {
-    coonnect(dbName, url)
+    connect(
+      dbName,
+      url
+    )
       .then(db => {
         // query ex. { product_name: productName }
         // update
@@ -108,7 +127,7 @@ const updateOne = (dbName, collectionName, query, update) => {
 };
 
 module.exports = {
-  coonnect: connect,
+  connect: connect,
   getCollection: getCollection,
   findOne: findOne,
   insertOne: insertOne,

@@ -1,14 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { connect, getCollection, insertItem, insertOne, deleteOne, updateOne } = require('../mongo/dbHelpers');
+const { connect, getCollection, insertItem, insertOne, deleteOne, updateOne, findOne } = require('../mongo/dbHelpers');
 
-var productRouter = express.Router();
+const productRouter = express.Router();
 
 productRouter.get('/', (req, res) => {
-  getCollection('saks', 'products').then(data => {
-    res.send(data);
-    console.log('data', data);
-  });
+  getCollection('saks', 'products')
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.send('Cannot get product');
+    });
+});
+
+productRouter.get('/:product_name', (req, res) => {
+  let item = { product_name: req.params.product_name };
+  findOne('saks', 'products', item)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 productRouter.post('/', (req, res) => {
@@ -18,10 +32,6 @@ productRouter.post('/', (req, res) => {
     designer: req.body.designer,
     type: req.body.type,
     price: req.body.price,
-    inventory: {
-      product_id: req.body.product_id,
-      count: req.body.count,
-    },
   };
   insertOne('saks', 'products', item)
     .then(data => {
@@ -33,25 +43,17 @@ productRouter.post('/', (req, res) => {
     });
 });
 
-productRouter.get('/:name', (req, res) => {
-  let item = { product_name: req.params.name };
-  findOne('saks', 'products', item)
-    .then(data => {
-      console.log('data', data);
-      res.send(data);
-
-      console.log(req.params.name);
-      // res.send(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-productRouter.delete('/:name', (req, res) => {
-  console.log(req.params.name);
-  let item = { product_name: req.params.name };
-  deleteOne('saks', 'products', item)
+productRouter.put('/:product_name', (req, res) => {
+  let query = { product_name: req.params.product_name };
+  let updates = {
+    $set: {
+      product_name: req.body.product_name,
+      designer: req.body.designer,
+      type: req.body.type,
+      price: req.body.price,
+    },
+  };
+  updateOne('saks', 'products', query, updates)
     .then(data => {
       console.log(data);
     })
@@ -60,22 +62,10 @@ productRouter.delete('/:name', (req, res) => {
     });
 });
 
-productRouter.put('/:name', (req, res) => {
-  res.set('Content-Type');
-  let query = { product_name: req.params.name };
-  let updates = {
-    $set: {
-      product_name: req.body.product_name,
-      designer: req.body.designer,
-      type: req.body.type,
-      price: req.body.price,
-      inventory: {
-        product_id: req.body.product_id,
-        count: req.body.count,
-      },
-    },
-  };
-  updateOne('saks', 'products', query, updates)
+productRouter.delete('/:product_name', (req, res) => {
+  console.log(req.params.name);
+  let item = { product_name: req.params.product_name };
+  deleteOne('saks', 'products', item)
     .then(data => {
       console.log(data);
     })
