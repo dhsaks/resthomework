@@ -9,6 +9,7 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 3. In local mongo, set up 'saks' database with collections 'orders', 'inventory', and 'products'
 4. reference the seeds folder and inserMany into orders, inventory, and products using their corresponding json files
 5. npm start
+6. When making request using postman or equivalent, make sure headers are set to have Content-Type be application/json
 
 # routes
 
@@ -36,16 +37,16 @@ Write a server that provides a REST API. A lot is left for your interpretation a
 
 ## put routes
 
-`products/:product_name` update product with fields product_name, designer, type, price
+`/products/:product_name` update product with fields product_name, designer, type, price
 
-`orders/:order_id` update order quantities and update inventory accordingly
+`/orders/:order_id` update order quantities and update inventory accordingly
 
-`inventory/:product_id` update inventory item with fields product_id and count
+`/inventory/:product_id` update inventory item with fields product_id and count
 
 ## delete routes
 
-`products/:product_name` delete by product name
+`/products/:product_name` delete by product name
 
-`orders/:order_id` delete by order id (for each cancelled order, said items will go back into inventory)
+`/orders/:order_id` delete by order id (for each cancelled order, said items will go back into inventory)
 
 `/inventory/:product_id` delete by product id

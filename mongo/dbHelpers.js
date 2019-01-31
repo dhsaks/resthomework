@@ -83,24 +83,6 @@ const findOne = (dbName, collectionName, item) => {
   });
 };
 
-const findOneAndUpdate = (dbName, collectionName, query, update) => {
-  return new Promise((resolve, reject) => {
-    connect(
-      dbName,
-      url
-    ).then(db => {
-      // find one ex. { product_name: productName }
-      db.collection(collectionName)
-        .findOneAndUpdate(query, update)
-        .then(result => {
-          resolve(result);
-        });
-    });
-  }).catch(err => {
-    reject(err);
-  });
-};
-
 // delete one document in the collection
 const deleteOne = (dbName, collectionName, item) => {
   return new Promise((resolve, reject) => {
@@ -123,6 +105,7 @@ const deleteOne = (dbName, collectionName, item) => {
 };
 
 // find one document and delete itdelete one document in the collection
+// this is preferable when needing to reference data of deleted item
 const findOneAndDelete = (dbName, collectionName, item) => {
   return new Promise((resolve, reject) => {
     connect(
@@ -162,6 +145,26 @@ const updateOne = (dbName, collectionName, query, update) => {
       .catch(err => {
         resolve(err);
       });
+  });
+};
+
+// find one document and update it
+// this is preferable when needing to use document's previou data before the update
+const findOneAndUpdate = (dbName, collectionName, query, update) => {
+  return new Promise((resolve, reject) => {
+    connect(
+      dbName,
+      url
+    ).then(db => {
+      // find one ex. { product_name: productName }
+      db.collection(collectionName)
+        .findOneAndUpdate(query, update)
+        .then(result => {
+          resolve(result);
+        });
+    });
+  }).catch(err => {
+    reject(err);
   });
 };
 
