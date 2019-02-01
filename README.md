@@ -1,41 +1,52 @@
-# The homework
+# Node Rest API
+
 Write a server that provides a REST API. A lot is left for your interpretation and decision-making. In the end, one should be able to interact with the API on a server somewhere using postman or CURL with a simple key. One should also be able to build the code from the repo and run it locally.
 
-# Write the code
-Fork this repo. Use any programming language, framework, database, etc.
+## Local Setup
 
-## Required Models
+1. Clone this repo.
+2. npm install
+3. In local mongo, set up 'saks' database with collections 'orders', 'inventory', and 'products'
+4. reference the seeds folder and inserMany into orders, inventory, and products using their corresponding json files
+5. npm start
+6. When making request using postman or equivalent, make sure headers are set to have Content-Type be application/json
 
-**Product**
+# routes
 
-Write a basic CRUD API for this model with the following required fields:
-- price
-- product name
-- type (ex. Jewelry, Shoes, Men's Shirts, etc)
+## get routes
 
-**Inventory**
+`/products` get all products
 
-Write a basic CRUD API for this with the following required fields:
-- product ID
-- count (amount in inventory)
+`/products/:product_name` get by product name
 
-**Order**
+`/orders` get all orders
 
-Write a basic CRUD API for this  with the following required Fields
-- product ID
-- count (amount of product in the order)
-- address
+`/orders/:order_id` get order by order id
 
-**IMPORTANT FUNCTIONAL REQUIREMENT:** maintain coherence between order counts and inventory counts. For instance, when an order is created, the application should subtract from inventory. When an order is deleted, the application should add back the order's items to the inventory.
+`/inventory` get all inventory
 
-# Secure the API
-Use SSL. Endpoints should be secured using some kind of token. For simplicity, you can just create an endpoint that will give a user a token if they use a secret password.
+`inventory/:prouct_id` get inventory item by product id
 
-# Run locally
-Someone should be to pull down your branch and, fairly easily, run the code locally.
+## post routes
 
-# Deploy it and create a PR
-Deploy it somewhere Heroku, AWS, Google Cloud, etc.  Create a PR back to this repo from your fork and include the URL to the deployed app.
+`/products` - post new product with fields product_name, designer, type, price
 
-# BONUS: Dockerize the application
-For bonus points, create a Dockerfile so anyone with the repo can build a docker image
+`/orders` post new order with fields product_id, count, street, city, state, zip (each order placed will update inventory accordingly)
+
+`/inventory` post new inventory item
+
+## put routes
+
+`/products/:product_name` update product with fields product_name, designer, type, price
+
+`/orders/:order_id` update order quantities and update inventory accordingly
+
+`/inventory/:product_id` update inventory item with fields product_id and count
+
+## delete routes
+
+`/products/:product_name` delete by product name
+
+`/orders/:order_id` delete by order id (for each cancelled order, said items will go back into inventory)
+
+`/inventory/:product_id` delete by product id
